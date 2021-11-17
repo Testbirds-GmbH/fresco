@@ -43,6 +43,7 @@ subprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 
     // FIXME: This picks up non-Java files by default, failing to parse them.
