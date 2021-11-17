@@ -9,6 +9,7 @@ package com.facebook.imagepipeline.image;
 
 import android.graphics.ColorSpace;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.util.Pair;
 import androidx.annotation.VisibleForTesting;
 import com.facebook.common.internal.Preconditions;
@@ -395,7 +396,9 @@ public class EncodedImage implements Closeable {
     try {
       inputStream = getInputStream();
       metaData = BitmapUtil.decodeDimensionsAndColorSpace(inputStream);
-      mColorSpace = metaData.getColorSpace();
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        mColorSpace = metaData.getColorSpace();
+      }
       Pair<Integer, Integer> dimensions = metaData.getDimensions();
       if (dimensions != null) {
         mWidth = dimensions.first;
